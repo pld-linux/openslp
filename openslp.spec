@@ -10,8 +10,7 @@ Version:	1.0.9
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
-# Source0:	http://prdownloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/openslp/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 URL:		http://www.openslp.org/
 BuildRequires:	autoconf
