@@ -7,7 +7,7 @@ Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	1.0.11
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
@@ -17,8 +17,6 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7b
-Prereq:		rc-scripts
-Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/openslp
@@ -30,8 +28,7 @@ existence, location, and configuration of networked services in
 enterprise networks.
 
 OpenSLP is an open source implementation of the SLPv2 protocol as
-defined by RFC 2608 and RFC 2614. This package include the daemon and
-libraries.
+defined by RFC 2608 and RFC 2614. This package include libraries.
 
 %description -l de
 Das Service Location Protocol ist ein IETF standard Protokoll welches
@@ -72,6 +69,23 @@ O Service Location Protocol é um protocolo normalizado pelo IETF que
 oferece uma plataforma para permitir às aplicações de rede que
 descubram a existência, localização e a configuração dos serviços de
 rede nas redes duma empresa.
+
+%package server
+Summary:	OpenSLP server working as SA and DA
+Group:		Networking/Daemons
+Requires(post,preun):	rc-scripts
+Requires(post,preun):	/sbin/chkconfig
+Requires:	%{name} = %{version}
+
+%description server
+Service Location Protocol is an IETF standards track protocol that
+provides a framework to allow networking applications to discover the
+existence, location, and configuration of networked services in
+enterprise networks.
+
+OpenSLP is an open source implementation of the SLPv2 protocol as
+defined by RFC 2608 and RFC 2614. This package include the daemon.
+
 
 %package devel
 Summary:	OpenSLP development files
@@ -125,8 +139,10 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%post server
 /sbin/chkconfig --add slpd
 if [ -r /var/lock/subsys/slpd ]; then
 	/etc/rc.d/init.d/slpd restart >&2
@@ -135,7 +151,7 @@ else
 fi
 
 
-%preun
+%preun server
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/slpd ]; then
 		/etc/rc.d/init.d/slpd stop
@@ -143,22 +159,25 @@ if [ "$1" = "0" ]; then
 	/sbin/chkconfig --del slpd
 fi
 
-%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS NEWS README
 %dir %{_sysconfdir}
 %config %{_sysconfdir}/slp.conf
 %config %{_sysconfdir}/slp.reg
 %config %{_sysconfdir}/slp.spi
-%attr(754,root,root) /etc/rc.d/init.d/slpd
-%attr(755,root,root) %{_sbindir}/slpd
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
+%files server
+%defattr(644,root,root,755)
+%attr(754,root,root) /etc/rc.d/init.d/slpd
+%attr(755,root,root) %{_sbindir}/slpd
+
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README doc/*
+%doc doc/*
 %{_includedir}/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
