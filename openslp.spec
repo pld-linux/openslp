@@ -6,12 +6,12 @@ Summary(it):	Implementazione open source del Service Location Protocol V2
 Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
-Version:	1.1.4
+Version:	1.1.5
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
-# Source0-md5:	f624d8e6cbaf9f78006981490fa00602
+# Source0-md5:	fc96583d1443da173e88910a5e937d78
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-ac.patch
@@ -130,7 +130,7 @@ Biblioteki statyczne OpenSLP.
 %patch1 -p1
 
 %build
-rm -f missing
+#rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -178,9 +178,9 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
 %dir %{_sysconfdir}
-%config %{_sysconfdir}/slp.conf
-%config %{_sysconfdir}/slp.reg
-%config %{_sysconfdir}/slp.spi
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.conf
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.reg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.spi
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
