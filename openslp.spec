@@ -7,7 +7,7 @@ Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	1.0.11
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
@@ -17,7 +17,7 @@ URL:		http://www.openslp.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	openssl-devel >= 0.9.6j
+BuildRequires:	openssl-devel >= 0.9.6k
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libopenslp1
 
