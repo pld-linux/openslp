@@ -18,10 +18,15 @@
 [ -f /etc/sysconfig/slpd ] && . /etc/sysconfig/slpd
 
 # Check that networking is up.
-if is_no "${NETWORKING}"; then
-	msg_Network_Down OpenSLP
-	exit 1
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down OpenSLP
+		exit 1
+	fi
+else
+	exit 0
 fi
+
 
 case "$1" in
   start)
@@ -31,49 +36,44 @@ case "$1" in
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/slpd
 	else
-		msg_Already_Running OpenSLP
+		msg_already_running OpenSLP
 		exit 1
 	fi
-        ;;
+	;;
   stop)
 	if [ -f /var/lock/subsys/slpd ]; then
 		msg_stopping OpenSLP
 		killproc slpd
 		rm -f /var/lock/subsys/slpd >/dev/null 2>&1
 	else
-		msg_Not_Running OpenSLP
+		msg_not_running OpenSLP
 		exit 1
 	fi	
-        ;;
-  reload)
+	;;
+  restart)
+	$0 stop
+	$0 start
+	;;
+  reload|force-reload)
 	if [ -f /var/lock/subsys/slpd ]; then
-		msg_show OpenSLP
-		msg_reload
+		msg_reloading OpenSLP
 		busy
 		killproc slpd -HUP
-		deltext
-		ok		
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && ok || died
 	else
-		msg_Not_Running OpenSLP
+		msg_not_running OpenSLP
 		exit 1
 	fi
-	;;
-  force-reload)
-	$0 reload
-	exit $?
-
-	# or if it doesn't
-	$0 stop && $0 start
-	exit $?
 	;;
   status)
 	status $0
 	exit $?
-        ;;
+	;;
   *)
-        # show "Usage: %s {start|stop|status|restart|reload|force-reload}" $0
-	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
-        exit 1
+	# show "Usage: %s {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 1
 esac
 
 exit $RETVAL
