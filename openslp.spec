@@ -13,6 +13,7 @@ Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	http://prdownloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
+Patch0:		%{name}-am15.patch
 URL:		http://www.openslp.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -97,6 +98,7 @@ OpenSLP staic libraries.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 rm -f missing
