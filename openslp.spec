@@ -1,18 +1,22 @@
 Summary:	OpenSLP implementation of Service Location Protocol V2
 Name:		openslp
-Version:	0.9.0
+Version:	1.0.1
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	http://prdownloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
-Source1:	%{name}.sysconfig
+Source1:	%{name}.init
+Patch0:		%{name}-ac25x.patch
 URL:		http://www.openslp.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 Prereq:		rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%defin		_sysconfdir		/etc/openslp
+%define		_sysconfdir		/etc/openslp
 
 %description
 Service Location Protocol is an IETF standards track protocol that
@@ -24,11 +28,51 @@ OpenSLP is an open source implementation of the SLPv2 protocol as
 defined by RFC 2608 and RFC 2614. This package include the daemon,
 libraries, header files and documentation
 
+%package devel
+Summary:	OpenSLP develpment files
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name} = %{version}
+
+%description devel
+OpenSLP develpment files.
+
+%package static
+Summary:	OpenSLP staic libraries
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name}-devel = %{version}
+
+%description static
+OpenSLP staic libraries.
+
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%configure
+rm -f missing
+libtoolize --copy --force
+aclocal
+autoconf
+automake -a -c
+%configure \
+	--enable-slpv1 \
+	--enable-slpv2-security \
+	--disable-predicates
+
 %{__make}
 
 %install
@@ -38,9 +82,9 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install etc/slpd.all_init $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
 
-gzip -9nf AUTHORS NEWS README doc/rfc/*
+gzip -9nf AUTHORS NEWS README doc/rfc/*txt
 
 %post
 /sbin/ldconfig
@@ -68,11 +112,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/*
 %dir %{_sysconfdir}
 %config %{_sysconfdir}/slp.conf
 %config %{_sysconfdir}/slp.reg
-/etc/rc.d/init.d/slpd
-%{_libdir}/libslp*
-%{_includedir}/slp.h
+%config %{_sysconfdir}/slp.spi
+%attr(754,root,root) /etc/rc.d/init.d/slpd
 %attr(755,root,root) %{_sbindir}/slpd
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
+
+%files devel
+%defattr(644,root,root,755)
+%doc *.gz doc/*
+%{_includedir}/*
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
