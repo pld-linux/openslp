@@ -11,6 +11,7 @@ Release:	3
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
+# Source0-md5: 0ec965956ad1f66850f050b19c828b55
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
 URL:		http://www.openslp.org/
