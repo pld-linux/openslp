@@ -123,8 +123,6 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
 
-gzip -9nf AUTHORS NEWS README doc/rfc/*txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -161,7 +159,7 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz doc/*
+%doc AUTHORS NEWS README doc/*
 %{_includedir}/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
