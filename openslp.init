@@ -57,10 +57,8 @@ case "$1" in
   reload|force-reload)
 	if [ -f /var/lock/subsys/slpd ]; then
 		msg_reloading OpenSLP
-		busy
 		killproc slpd -HUP
 		RETVAL=$?
-		[ $RETVAL -eq 0 ] && ok || died
 	else
 		msg_not_running OpenSLP
 		exit 1
