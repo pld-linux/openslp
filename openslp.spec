@@ -1,4 +1,9 @@
 Summary:	OpenSLP implementation of Service Location Protocol V2
+Summary(de):	Open source Implementierung des Service Location Protocols V2
+Summary(es):	Implementación open source del Service Location Protocol V2
+Summary(fr):	Implémentation Open Source du Service Location Protocol V2
+Summary(it):	Implementazione open source del Service Location Protocol V2
+Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	1.0.1
 Release:	1
