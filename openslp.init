@@ -67,7 +67,7 @@ case "$1" in
 	exit $?
 	;;
   status)
-	status <service>
+	status $0
 	exit $?
         ;;
   *)
