@@ -19,6 +19,7 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7b
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libopenslp1
 
 %define		_sysconfdir		/etc/openslp
 
@@ -101,6 +102,7 @@ Summary:	OpenSLP development files
 Summary(pl):	Czê¶æ OpenSLP dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	libopenslp1-devel
 
 %description devel
 OpenSLP development files.
