@@ -12,6 +12,7 @@ License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
+Patch0:		%{name}-opt.patch
 URL:		http://www.openslp.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -28,7 +29,7 @@ existence, location, and configuration of networked services in
 enterprise networks.
 
 OpenSLP is an open source implementation of the SLPv2 protocol as
-defined by RFC 2608 and RFC 2614. This package include libraries.
+defined by RFC 2608 and RFC 2614. This package includes libraries.
 
 %description -l de
 Das Service Location Protocol ist ein IETF standard Protokoll welches
@@ -62,7 +63,7 @@ pozwalaj±cym aplikacjom sieciowym na badanie istnienia, po³o¿enia i
 konfiguracji us³ug sieciowych.
 
 OpenSLP jest otwart± implementacj± protoko³u SLPv2 zdefiniowanego w
-RFC 2608 i RFC 2614. Ten pakiet zawiera demona i biblioteki.
+RFC 2608 i RFC 2614. Ten pakiet zawiera biblioteki.
 
 %description -l pt
 O Service Location Protocol é um protocolo normalizado pelo IETF que
@@ -72,8 +73,9 @@ rede nas redes duma empresa.
 
 %package server
 Summary:	OpenSLP server working as SA and DA
+Summary(pl):	Serwer OpenSLP dzia³aj±cy jako SA i DA
 Group:		Networking/Daemons
-Requires(post,preun):	rc-scripts
+PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}
 
@@ -84,8 +86,15 @@ existence, location, and configuration of networked services in
 enterprise networks.
 
 OpenSLP is an open source implementation of the SLPv2 protocol as
-defined by RFC 2608 and RFC 2614. This package include the daemon.
+defined by RFC 2608 and RFC 2614. This package includes the daemon.
 
+%description server -l pl
+Service Location Protocol jest zgodnym ze standardem IETF protoko³em
+pozwalaj±cym aplikacjom sieciowym na badanie istnienia, po³o¿enia i
+konfiguracji us³ug sieciowych.
+
+OpenSLP jest otwart± implementacj± protoko³u SLPv2 zdefiniowanego w
+RFC 2608 i RFC 2614. Ten pakiet zawiera demona.
 
 %package devel
 Summary:	OpenSLP development files
@@ -113,6 +122,7 @@ Biblioteki statyczne OpenSLP.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 rm -f missing
@@ -158,7 +168,6 @@ if [ "$1" = "0" ]; then
 	fi
 	/sbin/chkconfig --del slpd
 fi
-
 
 %files
 %defattr(644,root,root,755)
