@@ -1,0 +1,14 @@
+--- openslp-1.2.0/common/slp_spi.c.orig	2002-09-10 06:38:25.000000000 +0200
++++ openslp-1.2.0/common/slp_spi.c	2004-02-29 21:19:03.916339688 +0100
+@@ -267,9 +267,9 @@
+     fp = fopen(spifile,"r");
+     if(fp)
+     {
+-        result = xmalloc(sizeof(structSLPSpiHandle));
++        result = xmalloc(sizeof(struct _SLPSpiHandle));
+         if(result == 0) return 0;
+-        memset(result, 0, sizeof(structSLPSpiHandle));
++        memset(result, 0, sizeof(struct _SLPSpiHandle));
+         
+         result->spifile = xstrdup(spifile);
+         result->cacheprivate = cacheprivate;
