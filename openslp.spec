@@ -44,10 +44,22 @@ gzip -9nf AUTHORS NEWS README doc/rfc/*
 
 %post
 /sbin/ldconfig
-NAME=slpd; DESC="OpenSLP server"; %chkconfig_add
+/sbin/chkconfig --add slpd
+
+if [ -r /var/lock/subsys/slpd ]; then
+	/etc/rc.d/init.d/slpd restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/slpd start\" to start OpenSLP server."
+fi
+
 
 %preun
-NAME=slpd; %chkconfig_del
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/slpd ]; then
+		/etc/rc.d/init.d/slpd stop
+	fi
+	/sbin/chkconfig --del slpd
+fi
 
 %postun -p /sbin/ldconfig
 
