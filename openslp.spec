@@ -29,6 +29,38 @@ OpenSLP is an open source implementation of the SLPv2 protocol as
 defined by RFC 2608 and RFC 2614. This package include the daemon,
 libraries, header files and documentation
 
+%description -l de
+Das Service Location Protocol ist ein IETF standard Protokoll welches
+ein Gerüst bereitstellt um es Netzwerk-fähigen Anwendungen zu
+ermöglichen die Existenz, den Ort und die Konfiguration von
+Netzwerkdiensten in Unternehmensnetzwerken zu entdecken.
+
+%description -l es
+El Protocolo de Localización de Servicios es un protocolo de
+seguimiento acorde al estándar IETF que proporciona un entorno para
+permitir a las aplicaciones de red descubrir la existencia,
+localización y configuración de servicios de red en redes
+empresariales.
+
+%description -l fr
+Service Location Protocol est un protocole de suivi des normes IETF
+qui fournit un cadre permettant à des applications réseau de découvrir
+l'existence, l'emplacement et la configuration de services de réseau
+dans les réseaux d'entreprise.
+
+%description -l it
+Il Service Location Protocol (protocollo di localizzazione di servizi)
+è un protocollo standard IETF che fornisce un'infrastruttura per
+permettere alle applicazioni di rete di scoprire l'esistenza, la
+localizzazione e la configurazione dei servizi nelle reti delle
+aziende.
+
+%description -l pt
+O Service Location Protocol é um protocolo normalizado pelo IETF que
+oferece uma plataforma para permitir às aplicações de rede que
+descubram a existência, localização e a configuração dos serviços de
+rede nas redes duma empresa.
+
 %package devel
 Summary:	OpenSLP develpment files
 Group:		Development/Libraries
@@ -46,14 +78,6 @@ OpenSLP develpment files.
 
 %package static
 Summary:	OpenSLP staic libraries
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
