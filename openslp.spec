@@ -6,14 +6,15 @@ Summary(it):	Implementazione open source del Service Location Protocol V2
 Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
-Version:	1.0.11
-Release:	4
+Version:	1.2.0
+Release:	1
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
-# Source0-md5: 0ec965956ad1f66850f050b19c828b55
+# Source0-md5:	b101a73c11d759c6d7a48483f887fae7
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
+Patch1:		%{name}-fix.patch
 URL:		http://www.openslp.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -79,7 +80,7 @@ Summary(pl):	Serwer OpenSLP dzia³aj±cy jako SA i DA
 Group:		Networking/Daemons
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description server
 Service Location Protocol is an IETF standards track protocol that
@@ -102,7 +103,8 @@ RFC 2608 i RFC 2614. Ten pakiet zawiera demona.
 Summary:	OpenSLP development files
 Summary(pl):	Czê¶æ OpenSLP dla programistów
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
+Requires:	openssl-devel >= 0.9.7c
 Obsoletes:	libopenslp1-devel
 
 %description devel
@@ -115,7 +117,7 @@ Pliki nag³ówkowe OpenSLP.
 Summary:	OpenSLP static libraries
 Summary(pl):	Biblioteki statyczne OpenSLP
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 OpenSLP static libraries.
@@ -125,10 +127,10 @@ Biblioteki statyczne OpenSLP.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -163,7 +165,6 @@ else
 	echo "Run \"/etc/rc.d/init.d/slpd start\" to start OpenSLP server."
 fi
 
-
 %preun server
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/slpd ]; then
@@ -176,9 +177,9 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
 %dir %{_sysconfdir}
-%config %{_sysconfdir}/slp.conf
-%config %{_sysconfdir}/slp.reg
-%config %{_sysconfdir}/slp.spi
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.conf
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.reg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.spi
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
