@@ -1,113 +1,78 @@
-%define	ver 0.8.1
-%define	rel 1
-%define	name openslp
-%define libver 0.0.2
+Summary:	OpenSLP implementation of Service Location Protocol V2
+Name:		openslp
+Version:	0.9.0
+Release:	1
+License:	LGPL
+Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
+Group(pl):	Sieciowe/Serwery
+Source0:	http://prdownloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
+Source1:	%{name}.sysconfig
+URL:		http://www.openslp.org/
+Prereq:		rc-scripts
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-Name        	: openslp
-Version     	: %ver
-Release     	: %rel
-Group       	: Server/Network
-Provides        : openslp libslp.so slpd
-Summary     	: OpenSLP implementation of Service Location Protocol V2 
-Copyright   	: Caldera Systems (LGPL)
-Packager    	: Matthew Peterson <mpeterson@calderasystems.com>
-URL         	: http://www.openslp.org/
-BuildRoot   	: /tmp/%{name}-%{ver}
-Source0		: ftp://openslp.org/pub/openslp/%{name}-%{ver}/%{name}-%{ver}.tar.gz
+%defin		_sysconfdir		/etc/openslp
 
-
-%Description
+%description
 Service Location Protocol is an IETF standards track protocol that
 provides a framework to allow networking applications to discover the
 existence, location, and configuration of networked services in
 enterprise networks.
 
-OpenSLP is an open source implementation of the SLPv2 protocol as defined 
-by RFC 2608 and RFC 2614.  This package include the daemon, libraries, header 
-files and documentation
+OpenSLP is an open source implementation of the SLPv2 protocol as
+defined by RFC 2608 and RFC 2614. This package include the daemon,
+libraries, header files and documentation
 
-%Prep
-%setup
+%prep
+%setup -q
 
-%Build
-#./configure --with-RPM-prefix=$RPM_BUILD_ROOT
-./autogen.sh
-./configure --prefix=$RPM_BUILD_ROOT
-./configure
-make
+%build
+%configure
+%{__make}
 
-%Install
-%{mkDESTDIR}
-make install 
-mkdir -p $DESTDIR/etc/rc.d/init.d
-install -m 755 etc/slpd.all_init $DESTDIR/etc/rc.d/init.d/slpd
+%install
+rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
-%Clean
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install etc/slpd.all_init $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
+
+gzip -9nf AUTHORS NEWS README doc/rfc/*
+
+%post
+/sbin/ldconfig
+/sbin/chkconfig --add slpd
+
+if [ -r /var/lock/subsys/slpd ]; then
+	/etc/rc.d/init.d/slpd restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/slpd start\" to start OpenSLP server."
+fi
+
+
+%preun
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/slpd ]; then
+		/etc/rc.d/init.d/slpd stop
+	fi
+	/sbin/chkconfig --del slpd
+fi
+
+%postun -p /sbin/ldconfig
+
+%clean
 rm -rf $RPM_BUILD_ROOT
 
-%Post
-rm -f /usr/lib/libslp.so
-ln -s /usr/lib/libslp.so.%{libver} /usr/lib/libslp.so
-/sbin/ldconfig
-
-if [ -d '/usr/lib/OpenLinux' ]; then 
-cat <<EOD  > /etc/sysconfig/daemons/slpd
-IDENT=slp
-DESCRIPTIVE="SLP Service Agent"
-ONBOOT="yes"
-EOD
-fi
-
-if [ -x /sbin/chkconfig ]; then
-  chkconfig --add slpd
-else 
-  for i in 2 3 4 5; do
-    ln -sf /etc/rc.d/init.d/slpd /etc/rc.d/rc$i.d/S13slpd
-  done
-  for i in 0 1 6; do
-    ln -sf /etc/rc.d/init.d/slpd /etc/rc.d/rc$i.d/K87slpd
-  done
-fi
-
-%PreUn
-rm -f /etc/sysconfig/daemons/slpd
-if [ "$1" = "0" ]; then
-  if [ -x /sbin/chkconfig ]; then
-    /sbin/chkconfig --del slpd
-  else
-    for i in 2 3 4 5; do
-      rm -f /etc/rc.d/rc$i.d/S13slpd
-    done
-    for i in 0 1 6; do
-      rm -f /etc/rc.d/rc$i.d/K87slpd
-    done
-  fi
-fi
-
-%PostUn 
-if [ "$1" = "0" ]; then
-  rm -f /usr/lib/libslp.so
-fi
-/sbin/ldconfig
-
-
-%Files
-%defattr(-,root,root)
-%doc AUTHORS COPYING INSTALL NEWS README doc/*
-%config /etc/slp.conf
-%config /etc/slp.reg
+%files
+%defattr(644,root,root,755)
+%doc *.gz doc/*
+%dir %{_sysconfdir}
+%config %{_sysconfdir}/slp.conf
+%config %{_sysconfdir}/slp.reg
 /etc/rc.d/init.d/slpd
-/usr/lib/libslp*
-/usr/include/slp.h
-/usr/sbin/slpd
-
-
-%ChangeLog
-* Wed Jul 17 2000 mpeterson@calderasystems.com
-        Added lisa stuff
-	
-* Thu Jul 7 2000 david.mccormack@ottawa.com
-	Made it work with the new autoconf/automake scripts.
- 
-* Wed Apr 27 2000 mpeterson
-	started
+%{_libdir}/libslp*
+%{_includedir}/slp.h
+%attr(755,root,root) %{_sbindir}/slpd
