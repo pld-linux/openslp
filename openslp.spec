@@ -107,7 +107,7 @@ rm -f missing
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure \
 	--enable-slpv1 \
 	--enable-slpv2-security \
