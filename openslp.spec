@@ -6,7 +6,7 @@ Summary(it):	Implementazione open source del Service Location Protocol V2
 Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
-Version:	1.0.3
+Version:	1.0.4
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
