@@ -10,8 +10,6 @@ Version:	1.0.7
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Source0:	http://prdownloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-ac_fixes.ptch
@@ -80,13 +78,6 @@ rede nas redes duma empresa.
 Summary:	OpenSLP development files
 Summary(pl):	CzЙ╤Ф OpenSLP dla programistСw
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -99,13 +90,6 @@ Pliki nagЁСwkowe OpenSLP.
 Summary:	OpenSLP static libraries
 Summary(pl):	Biblioteki statyczne OpenSLP
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
