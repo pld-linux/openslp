@@ -31,8 +31,8 @@ existence, location, and configuration of networked services in
 enterprise networks.
 
 OpenSLP is an open source implementation of the SLPv2 protocol as
-defined by RFC 2608 and RFC 2614. This package include the daemon
-and libraries.
+defined by RFC 2608 and RFC 2614. This package include the daemon and
+libraries.
 
 %description -l de
 Das Service Location Protocol ist ein IETF standard Protokoll welches
