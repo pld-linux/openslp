@@ -17,7 +17,7 @@ URL:		http://www.openslp.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	openssl-devel >= 0.9.6k
+BuildRequires:	openssl-devel >= 0.9.6m
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libopenslp1
 
