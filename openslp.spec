@@ -3,10 +3,11 @@ Summary(de):	Open source Implementierung des Service Location Protocols V2
 Summary(es):	Implementación open source del Service Location Protocol V2
 Summary(fr):	Implémentation Open Source du Service Location Protocol V2
 Summary(it):	Implementazione open source del Service Location Protocol V2
+Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	1.0.2
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -20,6 +21,7 @@ BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.6b
 Prereq:		rc-scripts
+Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/openslp
@@ -31,8 +33,8 @@ existence, location, and configuration of networked services in
 enterprise networks.
 
 OpenSLP is an open source implementation of the SLPv2 protocol as
-defined by RFC 2608 and RFC 2614. This package include the daemon,
-libraries, header files and documentation
+defined by RFC 2608 and RFC 2614. This package include the daemon
+and libraries.
 
 %description -l de
 Das Service Location Protocol ist ein IETF standard Protokoll welches
@@ -60,6 +62,14 @@ permettere alle applicazioni di rete di scoprire l'esistenza, la
 localizzazione e la configurazione dei servizi nelle reti delle
 aziende.
 
+%description -l pl
+Service Location Protocol jest zgodnym ze standardem IETF protoko³em
+pozwalaj±cym aplikacjom sieciowym na badanie istnienia, po³o¿enia i
+konfiguracji us³ug sieciowych.
+
+OpenSLP jest otwart± implementacj± protoko³u SLPv2 zdefiniowanego w
+RFC 2608 i RFC 2614. Ten pakiet zawiera demona i biblioteki.
+
 %description -l pt
 O Service Location Protocol é um protocolo normalizado pelo IETF que
 oferece uma plataforma para permitir às aplicações de rede que
@@ -67,7 +77,8 @@ descubram a existência, localização e a configuração dos serviços de
 rede nas redes duma empresa.
 
 %package devel
-Summary:	OpenSLP develpment files
+Summary:	OpenSLP development files
+Summary(pl):	Czê¶æ OpenSLP dla programistów
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -79,10 +90,14 @@ Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
-OpenSLP develpment files.
+OpenSLP development files.
+
+%description devel -l pl
+Pliki nag³ówkowe OpenSLP.
 
 %package static
-Summary:	OpenSLP staic libraries
+Summary:	OpenSLP static libraries
+Summary(pl):	Biblioteki statyczne OpenSLP
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -94,7 +109,10 @@ Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
-OpenSLP staic libraries.
+OpenSLP static libraries.
+
+%description static -l pl
+Biblioteki statyczne OpenSLP.
 
 %prep
 %setup -q
@@ -124,10 +142,12 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/slpd
 
 gzip -9nf AUTHORS NEWS README doc/rfc/*txt
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 /sbin/ldconfig
 /sbin/chkconfig --add slpd
-
 if [ -r /var/lock/subsys/slpd ]; then
 	/etc/rc.d/init.d/slpd restart >&2
 else
@@ -144,9 +164,6 @@ if [ "$1" = "0" ]; then
 fi
 
 %postun -p /sbin/ldconfig
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
