@@ -1,12 +1,12 @@
---- openslp-1.0.7/configure.in~	Sat Feb  2 01:29:44 2002
-+++ openslp-1.0.7/configure.in	Sat Feb  2 01:29:44 2002
-@@ -114,40 +114,6 @@
+--- openslp-1.1.2/configure.in~	Wed May 15 13:03:38 2002
++++ openslp-1.1.2/configure.in	Wed May 15 13:03:38 2002
+@@ -97,40 +97,6 @@
  AM_PROG_LIBTOOL
  
  dnl ***********************************************************************
 -dnl Set C/C++ compiler specific warning/optimization flags
 -dnl ***********************************************************************
--if test X"$GCC" = X"yes"; then	
+-if test X"$GCC" = X"yes"; then        
 -    CFLAGS="$CFLAGS -Wall"
 -    if test X"$debug" = X"yes"; then
 -       CFLAGS="$CFLAGS -Werror"
@@ -20,10 +20,10 @@
 -    CFLAGS="$CFLAGS -xCC" 
 -    if test X"$debug" = X"no"; then
 -        OPTFLAGS="-fast"
--	if echo $CC | grep "xarch=v9"; then
+-        if echo $CC | grep "xarch=v9"; then
 -            dnl "-fast" sets -xarch=v8 disabling 64-bit mode, enable it again
--	    OPTFLAGS="$OPTFLAGS -xarch=v9"
--	fi
+-            OPTFLAGS="$OPTFLAGS -xarch=v9"
+-        fi
 -    fi
 -elif echo $host_os | grep -i "osf" >/dev/null; then
 -    CFLAGS="$CFLAGS -std"
@@ -41,7 +41,7 @@
  dnl Checks for header files.
  dnl ***********************************************************************
  AC_STDC_HEADERS
-@@ -164,7 +130,7 @@
+@@ -147,7 +113,7 @@
  dnl ***********************************************************************
  AC_CHECK_LIB(resolv, inet_aton)
  AC_CHECK_LIB(socket, main)
