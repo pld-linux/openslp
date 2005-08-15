@@ -6,22 +6,22 @@ Summary(it):	Implementazione open source del Service Location Protocol V2
 Summary(pl):	Otwarta implementacja Service Location Protocol V2
 Summary(pt):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
-Version:	1.2.0
+# note: 1.3.0 is "development" release _equal_ to 1.2.0
+Version:	1.2.1
 Release:	1
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
-# Source0-md5:	b101a73c11d759c6d7a48483f887fae7
+# Source0-md5:	ff9999d1b44017281dd00ed2c4d32330
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
-Patch1:		%{name}-fix.patch
 URL:		http://www.openslp.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libopenslp1
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/openslp
 
@@ -78,9 +78,9 @@ rede nas redes duma empresa.
 Summary:	OpenSLP server working as SA and DA
 Summary(pl):	Serwer OpenSLP dzia³aj±cy jako SA i DA
 Group:		Networking/Daemons
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
+Requires:	rc-scripts
 
 %description server
 Service Location Protocol is an IETF standards track protocol that
@@ -128,7 +128,6 @@ Biblioteki statyczne OpenSLP.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -177,9 +176,9 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
 %dir %{_sysconfdir}
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.conf
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.reg
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/slp.spi
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/slp.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/slp.reg
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/slp.spi
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
@@ -191,9 +190,9 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*
-%{_includedir}/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
+%{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
