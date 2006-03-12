@@ -20,6 +20,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	libopenslp1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -158,17 +159,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post server
 /sbin/chkconfig --add slpd
-if [ -r /var/lock/subsys/slpd ]; then
-	/etc/rc.d/init.d/slpd restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/slpd start\" to start OpenSLP server."
-fi
+%service slpd restart "OpenSLP server"
 
 %preun server
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/slpd ]; then
-		/etc/rc.d/init.d/slpd stop
-	fi
+	%service slpd stop
 	/sbin/chkconfig --del slpd
 fi
 
