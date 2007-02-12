@@ -1,10 +1,10 @@
 Summary:	OpenSLP implementation of Service Location Protocol V2
-Summary(de):	Open source Implementierung des Service Location Protocols V2
-Summary(es):	ImplementaciÛn open source del Service Location Protocol V2
-Summary(fr):	ImplÈmentation Open Source du Service Location Protocol V2
-Summary(it):	Implementazione open source del Service Location Protocol V2
-Summary(pl):	Otwarta implementacja Service Location Protocol V2
-Summary(pt):	ImplementaÁ„o 'open source' do protocolo Service Location Protocol V2
+Summary(de.UTF-8):   Open source Implementierung des Service Location Protocols V2
+Summary(es.UTF-8):   Implementaci√≥n open source del Service Location Protocol V2
+Summary(fr.UTF-8):   Impl√©mentation Open Source du Service Location Protocol V2
+Summary(it.UTF-8):   Implementazione open source del Service Location Protocol V2
+Summary(pl.UTF-8):   Otwarta implementacja Service Location Protocol V2
+Summary(pt.UTF-8):   Implementa√ß√£o 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 # note: 1.3.0 is "development" release _equal_ to 1.2.0
 Version:	1.2.1
@@ -35,49 +35,49 @@ enterprise networks.
 OpenSLP is an open source implementation of the SLPv2 protocol as
 defined by RFC 2608 and RFC 2614. This package includes libraries.
 
-%description -l de
+%description -l de.UTF-8
 Das Service Location Protocol ist ein IETF standard Protokoll welches
-ein Ger¸st bereitstellt um es Netzwerk-f‰higen Anwendungen zu
-ermˆglichen die Existenz, den Ort und die Konfiguration von
+ein Ger√ºst bereitstellt um es Netzwerk-f√§higen Anwendungen zu
+erm√∂glichen die Existenz, den Ort und die Konfiguration von
 Netzwerkdiensten in Unternehmensnetzwerken zu entdecken.
 
-%description -l es
-El Protocolo de LocalizaciÛn de Servicios es un protocolo de
-seguimiento acorde al est·ndar IETF que proporciona un entorno para
+%description -l es.UTF-8
+El Protocolo de Localizaci√≥n de Servicios es un protocolo de
+seguimiento acorde al est√°ndar IETF que proporciona un entorno para
 permitir a las aplicaciones de red descubrir la existencia,
-localizaciÛn y configuraciÛn de servicios de red en redes
+localizaci√≥n y configuraci√≥n de servicios de red en redes
 empresariales.
 
-%description -l fr
+%description -l fr.UTF-8
 Service Location Protocol est un protocole de suivi des normes IETF
-qui fournit un cadre permettant ‡ des applications rÈseau de dÈcouvrir
-l'existence, l'emplacement et la configuration de services de rÈseau
-dans les rÈseaux d'entreprise.
+qui fournit un cadre permettant √† des applications r√©seau de d√©couvrir
+l'existence, l'emplacement et la configuration de services de r√©seau
+dans les r√©seaux d'entreprise.
 
-%description -l it
+%description -l it.UTF-8
 Il Service Location Protocol (protocollo di localizzazione di servizi)
-Ë un protocollo standard IETF che fornisce un'infrastruttura per
+√® un protocollo standard IETF che fornisce un'infrastruttura per
 permettere alle applicazioni di rete di scoprire l'esistenza, la
 localizzazione e la configurazione dei servizi nelle reti delle
 aziende.
 
-%description -l pl
-Service Location Protocol jest zgodnym ze standardem IETF protoko≥em
-pozwalaj±cym aplikacjom sieciowym na badanie istnienia, po≥oøenia i
-konfiguracji us≥ug sieciowych.
+%description -l pl.UTF-8
+Service Location Protocol jest zgodnym ze standardem IETF protoko≈Çem
+pozwalajƒÖcym aplikacjom sieciowym na badanie istnienia, po≈Ço≈ºenia i
+konfiguracji us≈Çug sieciowych.
 
-OpenSLP jest otwart± implementacj± protoko≥u SLPv2 zdefiniowanego w
+OpenSLP jest otwartƒÖ implementacjƒÖ protoko≈Çu SLPv2 zdefiniowanego w
 RFC 2608 i RFC 2614. Ten pakiet zawiera biblioteki.
 
-%description -l pt
-O Service Location Protocol È um protocolo normalizado pelo IETF que
-oferece uma plataforma para permitir ‡s aplicaÁıes de rede que
-descubram a existÍncia, localizaÁ„o e a configuraÁ„o dos serviÁos de
+%description -l pt.UTF-8
+O Service Location Protocol √© um protocolo normalizado pelo IETF que
+oferece uma plataforma para permitir √†s aplica√ß√µes de rede que
+descubram a exist√™ncia, localiza√ß√£o e a configura√ß√£o dos servi√ßos de
 rede nas redes duma empresa.
 
 %package server
 Summary:	OpenSLP server working as SA and DA
-Summary(pl):	Serwer OpenSLP dzia≥aj±cy jako SA i DA
+Summary(pl.UTF-8):   Serwer OpenSLP dzia≈ÇajƒÖcy jako SA i DA
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -92,17 +92,17 @@ enterprise networks.
 OpenSLP is an open source implementation of the SLPv2 protocol as
 defined by RFC 2608 and RFC 2614. This package includes the daemon.
 
-%description server -l pl
-Service Location Protocol jest zgodnym ze standardem IETF protoko≥em
-pozwalaj±cym aplikacjom sieciowym na badanie istnienia, po≥oøenia i
-konfiguracji us≥ug sieciowych.
+%description server -l pl.UTF-8
+Service Location Protocol jest zgodnym ze standardem IETF protoko≈Çem
+pozwalajƒÖcym aplikacjom sieciowym na badanie istnienia, po≈Ço≈ºenia i
+konfiguracji us≈Çug sieciowych.
 
-OpenSLP jest otwart± implementacj± protoko≥u SLPv2 zdefiniowanego w
+OpenSLP jest otwartƒÖ implementacjƒÖ protoko≈Çu SLPv2 zdefiniowanego w
 RFC 2608 i RFC 2614. Ten pakiet zawiera demona.
 
 %package devel
 Summary:	OpenSLP development files
-Summary(pl):	CzÍ∂Ê OpenSLP dla programistÛw
+Summary(pl.UTF-8):   Czƒô≈õƒá OpenSLP dla programist√≥w
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	openssl-devel >= 0.9.7c
@@ -111,19 +111,19 @@ Obsoletes:	libopenslp1-devel
 %description devel
 OpenSLP development files.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe OpenSLP.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe OpenSLP.
 
 %package static
 Summary:	OpenSLP static libraries
-Summary(pl):	Biblioteki statyczne OpenSLP
+Summary(pl.UTF-8):   Biblioteki statyczne OpenSLP
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 OpenSLP static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne OpenSLP.
 
 %prep
