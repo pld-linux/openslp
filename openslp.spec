@@ -1,10 +1,10 @@
 Summary:	OpenSLP implementation of Service Location Protocol V2
-Summary(de.UTF-8):   Open source Implementierung des Service Location Protocols V2
-Summary(es.UTF-8):   Implementación open source del Service Location Protocol V2
-Summary(fr.UTF-8):   Implémentation Open Source du Service Location Protocol V2
-Summary(it.UTF-8):   Implementazione open source del Service Location Protocol V2
-Summary(pl.UTF-8):   Otwarta implementacja Service Location Protocol V2
-Summary(pt.UTF-8):   Implementação 'open source' do protocolo Service Location Protocol V2
+Summary(de.UTF-8):	Open source Implementierung des Service Location Protocols V2
+Summary(es.UTF-8):	Implementación open source del Service Location Protocol V2
+Summary(fr.UTF-8):	Implémentation Open Source du Service Location Protocol V2
+Summary(it.UTF-8):	Implementazione open source del Service Location Protocol V2
+Summary(pl.UTF-8):	Otwarta implementacja Service Location Protocol V2
+Summary(pt.UTF-8):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 # note: 1.3.0 is "development" release _equal_ to 1.2.0
 Version:	1.2.1
@@ -77,7 +77,7 @@ rede nas redes duma empresa.
 
 %package server
 Summary:	OpenSLP server working as SA and DA
-Summary(pl.UTF-8):   Serwer OpenSLP działający jako SA i DA
+Summary(pl.UTF-8):	Serwer OpenSLP działający jako SA i DA
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -102,7 +102,7 @@ RFC 2608 i RFC 2614. Ten pakiet zawiera demona.
 
 %package devel
 Summary:	OpenSLP development files
-Summary(pl.UTF-8):   Część OpenSLP dla programistów
+Summary(pl.UTF-8):	Część OpenSLP dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	openssl-devel >= 0.9.7c
@@ -116,7 +116,7 @@ Pliki nagłówkowe OpenSLP.
 
 %package static
 Summary:	OpenSLP static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne OpenSLP
+Summary(pl.UTF-8):	Biblioteki statyczne OpenSLP
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
