@@ -8,7 +8,7 @@ Summary(pt.UTF-8):	Implementação 'open source' do protocolo Service Location P
 Name:		openslp
 # note: 1.3.0 is "development" release _equal_ to 1.2.0
 Version:	1.2.1
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
