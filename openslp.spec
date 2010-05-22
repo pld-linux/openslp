@@ -10,7 +10,7 @@ Name:		openslp
 Version:	1.2.1
 Release:	4
 License:	LGPL
-Group:		Networking/Daemons
+Group:		Libraries
 Source0:	http://dl.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 # Source0-md5:	ff9999d1b44017281dd00ed2c4d32330
 Source1:	%{name}.init
