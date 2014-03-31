@@ -1,0 +1,11 @@
+--- openslp-2.0.0/libslpattr/libslpattr_tiny.c~	2012-11-28 18:07:04.000000000 +0100
++++ openslp-2.0.0/libslpattr/libslpattr_tiny.c	2014-03-31 13:31:35.415660078 +0200
+@@ -193,7 +193,7 @@
+ 
+ 
+ SLPError SLPAttrSet_opaque(SLPAttributes attr_h, const char * tag,
+-      const char * val, const unsigned int len, SLPInsertionPolicy policy)
++      const char * val, size_t len, SLPInsertionPolicy policy)
+ {
+    return SLP_NOT_IMPLEMENTED;
+ }

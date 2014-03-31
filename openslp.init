@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 #
-#/etc/rc.d/init.d/slpd
-#
-# Starts the at daemon
+# Starts the OpenSLP daemon
 #
 # chkconfig:	345 40 60
 # description:	OpenSLP daemon for the Service Location Protocol

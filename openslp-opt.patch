@@ -1,25 +1,27 @@
---- openslp-1.2.1/configure.in.orig	2005-02-15 21:06:02.000000000 +0100
-+++ openslp-1.2.1/configure.in	2005-08-15 11:42:58.633764528 +0200
-@@ -129,9 +129,6 @@
-     if test X"$debug" = X"yes"; then
-        CFLAGS="$CFLAGS -Werror"
-     fi
--    if test X"$debug" = X"no"; then 
--       OPTFLAGS="-O3"
--    fi
-     
+--- openslp-1.2.1/configure.ac.orig	2005-02-15 21:06:02.000000000 +0100
++++ openslp-1.2.1/configure.ac	2005-08-15 11:42:58.633764528 +0200
+@@ -29,9 +29,9 @@
+ #
+ # Checks for libraries
+ #
+-AC_CHECK_LIB([resolv], [inet_aton])
+-AC_CHECK_LIB([socket], [socket])
+-AC_CHECK_LIB([nsl], [gethostbyname])
++AC_SEARCH_LIBS([inet_aton], [resolv])
++AC_SEARCH_LIBS([socket], [socket])
++AC_SEARCH_LIBS([gethostbyname], [nsl])
+ AC_CHECK_LIB([m], [log10])
+ AC_CHECK_LIB([pthread], [pthread_create])
+ 
+@@ -213,11 +213,6 @@
+   #   disable optimization for debug builds
+   #   enable high-level optimizations for non-debug builds
+   CFLAGS="$CFLAGS -Wall $GCC_OS_FLAGS"
+-  if test "x${debug}" = xyes; then 
+-    OPTFLAGS="-O0"
+-  else
+-    OPTFLAGS="-O2"
+-  fi
  elif $CC -V 2>&1 | grep "WorkShop Compilers"; then
-     dnl Allow C++ style comments
-@@ -170,9 +167,9 @@
- dnl ***********************************************************************
- dnl Checks for libraries.
- dnl ***********************************************************************
--AC_CHECK_LIB(resolv, inet_aton)
--AC_CHECK_LIB(socket, main)
--AC_CHECK_LIB(nsl, gethostbyname)
-+AC_SEARCH_LIBS(inet_aton, resolv)
-+AC_SEARCH_LIBS(socket, socket)
-+AC_SEARCH_LIBS(gethostbyname, nsl)
- dnl AC_CHECK_LIB(m, main)
- dnl AC_CHECK_FUNCS(ceil log10 strncasecmp strcasecmp )
- AC_CHECK_FUNCS(strncasecmp strcasecmp)
+   # Solaris Workshop: enable optimizations for debug builds
+   if test "x${debug}" = xno; then
