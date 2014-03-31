@@ -8,19 +8,20 @@ Summary(pt.UTF-8):	Implementação 'open source' do protocolo Service Location P
 Name:		openslp
 Version:	2.0.0
 Release:	1
-License:	LGPL
+License:	BSD
 Group:		Libraries
-Source0:	http://download.sourceforge.net/openslp/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 # Source0-md5:	18cf7940bcc444e32592cf34e84f833f
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-build.patch
 URL:		http://www.openslp.org/
-BuildRequires:	autoconf >= 2.50
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	zlib-devel
 Obsoletes:	libopenslp1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -106,6 +107,7 @@ Summary(pl.UTF-8):	Część OpenSLP dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	openssl-devel >= 0.9.7c
+Requires:	zlib-devel
 Obsoletes:	libopenslp1-devel
 
 %description devel
@@ -133,7 +135,7 @@ Biblioteki statyczne OpenSLP.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
