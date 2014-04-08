@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Otwarta implementacja Service Location Protocol V2
 Summary(pt.UTF-8):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	2.0.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
@@ -15,6 +15,7 @@ Source0:	http://downloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-build.patch
+Patch2:		%{name}-symbol-clashes.patch
 URL:		http://www.openslp.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -132,11 +133,13 @@ Biblioteki statyczne OpenSLP.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--enable-slpv1 \
