@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Otwarta implementacja Service Location Protocol V2
 Summary(pt.UTF-8):	Implementação 'open source' do protocolo Service Location Protocol V2
 Name:		openslp
 Version:	2.0.0
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/openslp/%{name}-%{version}.tar.gz
