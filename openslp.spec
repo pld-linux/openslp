@@ -24,7 +24,7 @@ BuildRequires:	libtool
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	zlib-devel
-Obsoletes:	libopenslp1
+Obsoletes:	libopenslp1 < 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/openslp
@@ -110,7 +110,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	openssl-devel >= 0.9.7c
 Requires:	zlib-devel
-Obsoletes:	libopenslp1-devel
+Obsoletes:	libopenslp1-devel < 2
 
 %description devel
 OpenSLP development files.
